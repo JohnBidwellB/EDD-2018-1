@@ -39,6 +39,22 @@ nombre = input("Nombre: ")
 print(nombre)
 ```
 
+**Strings**
+
+```python
+var1 = "Hola mundo"
+
+print(var[0]) # H
+print(var[0:4]) # Hola
+
+var2 = "Adiós"
+
+print(var1 + ', ' + var2) # Hola mundo, Adiós
+print(var2 * 2) # AdiósAdiós
+
+print("Hola curso, su ayudante de {} será {}".format("EDD", "John Bidwell"))
+```
+
 **Condiciones**
 
 ```python
@@ -132,6 +148,12 @@ a.info_completa()
 
 **Módulos**
 
+```python
+import module_name
+
+variable = module_name.method()
+```
+
 **Listas**
 
 ```Python
@@ -141,6 +163,7 @@ lista = list("Hola")
 len(lista) # Cantidad de elementos
 lista[2] # Retorna el elemento en la posición 2
 lista.append(10) # Agrega al final
+lista.pop() # Elimina el último elemento
 lista.count(elemento) # Cantidad de veces que está elemento en la lista
 del lista[posicion] # Elimina el elemento en posicion
 lista.remove(x) # Elimina todas las ocurrencias de x en la lista
@@ -153,8 +176,21 @@ for elemento in lista:
   print(elemento)
 ```
 
+
 **Diccionarios**
 
 ```python
 diccionario = { 'nombre': "John", 'edad': 23, 'carrera': "ICIT" }
-print(diccionario.nombre)
+print(diccionario['nombre'])
+
+diccionario['Universidad'] = 'UDP'
+
+del diccionario['nombre']
+diccionario.clear()
+del diccionario
+
+str(diccionario) # Version imprimible
+
+for key, value in diccionario.items(): # Recorrer un diccionario
+  print(key + ": " + str(value))
+```
