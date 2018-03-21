@@ -44,8 +44,8 @@ print(nombre)
 ```python
 var1 = "Hola mundo"
 
-print(var[0]) # H
-print(var[0:4]) # Hola
+print(var1[0]) # H
+print(var1[0:4]) # Hola
 
 var2 = "Adiós"
 
