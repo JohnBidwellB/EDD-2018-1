@@ -1,3 +1,5 @@
+
+
 # Contenidos
 
 * Árboles.
@@ -49,23 +51,27 @@ Se comienza con la raiz del árbol y luego se realizan 3 acciones.
   - Atraviese el sub-árbol derecho
   - Visite la raíz
 
+#### Visualización
 
+Pueden comprobar visualmente todas las operaciones y recorrido en el siguiente [link](http://www.cs.armstrong.edu/liang/animation/web/BST.html).
 
 #### Implementación
 
 
 ```python
+# -*- coding: utf-8 -*-
+
 class Node:
     def __init__(self, value):
         self.left = None
         self.right = None
         self.value = value
 
-class ABB:
-    def __init__(self, value):
+class BST:
+    def __init__(self):
         self.root = None
 
-    def empty(element):
+    def empty(self):
         return self.root == None
 
     def __add(self, value, node):
@@ -85,10 +91,12 @@ class ABB:
             node = Node(value)
             self.root = node
         else:
-            __add(self, value, self.root)
+            self.__add(value, self.root)
 
     def __search(self, value, node):
-        if value == node.value:
+        if node == None:
+            return False
+        elif value == node.value:
             return True
         elif value < node.value:
             self.__search(self, value, node.left)
@@ -101,30 +109,43 @@ class ABB:
         else:
             self.__search(self, value, self.root)
 
-    def delete(): #Implementar
+    def delete(self): #Implementar
         pass
 
-    def in_order(): #Implementar
+    def in_order(self, node = None):
+      pass
+
+    def post_order(self): #Implementar
         pass
 
-    def post_order(): #Implementar
+    def pre_order(self): #Implementar
         pass
 
-    def pre_order(): #Implementar
+    def leaf_number(self): #Implementar
         pass
 
-    def leaf_number(): #Implementar
+    def tree_height(self): #Implementar
         pass
 
-    def tree_height(): #Implementar
+    def node_height(self): #Implementar
         pass
 
-    def node_height(): #Implementar
+    def find_minimum(self): #Implementar
         pass
 
-    def find_minimum(): #Implementar
+    def find_maximum(self, node): #Implementar
         pass
 
-    def find_maximum(): #Implementar
-        pass
+
+if __name__=="__main__":
+    bst = BST()
+    bst.add(10)
+    bst.add(12)
+    bst.add(5)
+    bst.add(4)
+    bst.add(20)
+    bst.add(8)
+    bst.add(7)
+    bst.add(15)
+    bst.add(13)
 ```
