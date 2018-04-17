@@ -34,3 +34,49 @@ Ademas, escriba el algoritmo **intercambio**, el cual toma dos pilas A y B como 
 def intercambio(...):
   pass
 ```
+
+
+## Pauta
+
+Distribución de puntajes:
+  - Método push():
+    - 0.5pts por crear nodo
+    - 0.5pts por comprobar que está vacía  y asignar el nuevo nodo en el tope
+    - 1pto por asignar el nuevo nodo al tope de la pila
+  - Método pop():
+    - 1pto por comprobar que está vacía
+    - 1pto por asignar el nuevo nodo al tope de la pila
+
+
+```python
+class Stack:
+
+  def push(self, element):
+        node = Node(element)
+        self.count += 1
+        if self.empty():
+            self.head = node
+        else:
+            node.prev = self.head
+            self.head = node
+
+  def pop(self):
+      if self.empty():
+          return False
+      else:
+          self.head = self.head.prev
+          self.count -= 1
+
+def intercambio(stack1, stack2):
+  aux = Stack()
+  while(stack1.empty() == False and stack2.empty() == False):
+      aux.push(stack1.top)
+      aux.push(stack2.top)
+      stack1.pop()
+      stack2.pop()
+  while(aux.empty() == False):
+      stack1.push(aux.top())
+      aux.pop()
+      stack2.push(aux.top())
+      aux.pop()
+```

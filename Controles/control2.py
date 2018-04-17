@@ -3,6 +3,9 @@ class Node:
         self.prev = None
         self.value = value
 
+    def __srt__(self):
+        return ("{}".format(str(self.value())))
+
 class Stack:
     def __init__(self):
         self.head = None
