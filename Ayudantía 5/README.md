@@ -113,7 +113,7 @@ class BST:
         pass
 
     def in_order(self, node = None):
-      pass
+
 
     def post_order(self): #Implementar
         pass
@@ -128,7 +128,9 @@ class BST:
         pass
 
     def node_height(self): #Implementar
-        pass
+        aux = self.root
+        height = 0
+        if
 
     def find_minimum(self): #Implementar
         pass
