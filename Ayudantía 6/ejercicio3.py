@@ -1,64 +1,3 @@
-
-
-# Contenidos
-
-* Árboles.
-* Árbol binario.
-* Recorrido in-order, post-order, pre-order.
-
-## Árboles
-
-Está compuesto por 0 o más nodos.
-
-Cada nodo tiene:
-  - Dos punteros a los hijos: Uno para el hijo izquierdo, otro para el hijo derecho.
-  - Información.
-
-Así como en listas teníamos el nodo Head para acceder a la lista, en árboles tenemos el nodo root(raiz), desde este nodo se construye el árbol.
-
-Un nodo que no tiene hijos se considera como un nodo hoja.
-
-#### Atributos
-
-* Tamaño: Cantidad de nodos que componen el árbol.
-* Profundidad: Hay de 2 tipos
-  - De nodo: Distancia entre el nodo y la raiz.
-  - De árbol: Distancia entre la raiz y el nodo de mayor profundidad.
-* Árbol balanceado: Árbol que tiene todos los niveles completos.
-
-## Árbol binario de búsqueda
-
-Árbol en que cada los hijos izquierdo de cada nodo sean menores que el y los hijos derechos sean mayores. Útil para encontrar información.
-
-![Binary Search Tree](images/bst.png)
-
-![Binary Search Tree construction](images/BSTConstruction.png)
-
-#### Recorrido de un árbol binario
-
-Se comienza con la raiz del árbol y luego se realizan 3 acciones.
-
-* In-order: Se recorre primero el lado izquierdo del árbol, luego la raiz y finalmente el lado derecho del árbol, o dicho de otra manera, de menor a mayor.
-  - Atraviese el sub-árbol izquierdo
-  - Visite la raíz
-  - Atraviese el sub-árbol derecho
-* Pre-order: Se recorre primero la raiz y luego los sub-árboles
-  - Visite la raíz
-  - Atraviese el sub-árbol izquierdo
-  - Atraviese el sub-árbol derecho
-* Post-order: Se recorre primero cada sub-árbol y finalmente la raiz
-  - Atraviese el sub-árbol izquierdo
-  - Atraviese el sub-árbol derecho
-  - Visite la raíz
-
-#### Visualización
-
-Pueden comprobar visualmente todas las operaciones y recorrido en el siguiente [link](http://www.cs.armstrong.edu/liang/animation/web/BST.html).
-
-#### Implementación
-
-
-```python
 # -*- coding: utf-8 -*-
 
 class Node:
@@ -163,7 +102,7 @@ class BST:
             node.value = successor.value # Copy the value
             self.delete_node(successor)
 
-    def in_order(self, node): #Implementar
+    def in_order(self, node, list = []): #Implementar
         if node==None:
             pass
         else:
@@ -236,16 +175,65 @@ class BST:
                 current = current.right
             return current
 
+def new_abb(abb, li, ls):
+    def numbers_in_range(node, li, ls, list = []):
+        if node != None:
+            # Esto es similar al recorrido in-order
+            # La diferencia es que agregamos condiciones para que no
+            # visite nodos que no estarán dentro del intervalo
+            print("Visitando nodo con valor ", node.value)
+            if node.value > li and node.value < ls:
+                numbers_in_range(node.left, li, ls, list)
+                list.append(node.value)
+                numbers_in_range(node.right, li, ls, list)
+            if node.value < li and node.value < ls:
+                numbers_in_range(node.right, li, ls, list)
+            if node.value > li and node.value > ls:
+                numbers_in_range(node.left, li, ls, list)
+
+    def insert_into_bst(list, abb):
+        if len(list) != 0:
+            # Primero insertamos en el abb el número central de la lista (como les expliqué en la ayudantía)
+            print("Insertado el número: ", list[int(len(list)/2)])
+            abb.insert(list[int(len(list)/2)])
+            # Luego insertamos el sub-árbol izquierdo
+            insert_into_bst(list[0:int(len(list)/2)], abb)
+            # Luego el derecho
+            insert_into_bst(list[int(len(list)/2) + 1:len(list)], abb)
+
+    # Lista para guardar los números que irán en el nuevo árbol
+    list = []
+    # Obtenemos los números que estén dentro de los límites
+    numbers_in_range(abb.root, li, ls, list)
+    # Creamos el nuevo árbol binario
+    new_abb = BST()
+    # Agregamos los valors al árbol
+    insert_into_bst(list, new_abb)
+    # retornamos el nuevo árbol binario
+    return new_abb
+
+
 
 if __name__=="__main__":
     bst = BST()
-    bst.add(10)
-    bst.add(12)
-    bst.add(5)
-    bst.add(4)
-    bst.add(20)
-    bst.add(8)
-    bst.add(7)
-    bst.add(15)
-    bst.add(13)
-```
+    bst.insert(10)
+    bst.insert(12)
+    bst.insert(5)
+    bst.insert(4)
+    bst.insert(20)
+    bst.insert(8)
+    bst.insert(7)
+    bst.insert(15)
+    bst.insert(13)
+    bst.insert(9)
+    bst.insert(11)
+    bst.insert(22)
+    bst.insert(17)
+    bst.insert(3)
+    bst.insert(2)
+    bst.insert(1)
+    print("=== In order ===")
+    bst.in_order(bst.root)
+    print("=== end in order ===")
+    new_abb = new_abb(bst, 6, 16) # Aquí generaremos el nuevo árbol binario
+    new_abb.pre_order(new_abb.root)
