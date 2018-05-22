@@ -12,7 +12,7 @@ class Node:
     def _is_leaf(self):
         return len(self.child) == 0
 
-    def _add(self, data):
+    def _add(self, new_node):
         for child in new_node.child:
             child.parent = self
         self.data.extend(new_node.data)
@@ -24,13 +24,15 @@ class Node:
             self._split()
 
     # Encuentra el nodo correcto donde insertar el nuevo nodo    
-    def insert(self, new_node):
+    def _insert(self, new_node):
+
         # Si es hoja, añade el dato a la hoja y hace un balanceo
-        if self._is_leaf():
+        if self._is_leaf(): 
             self._add(new_node)
+
         # Si no es hoja, debe encontrar el hijo correcto para descender y hace una inserción recursiva
         elif new_node.data[0] > self.data[-1]:
-            self.child[-1].insert(new_node)
+            self.child[-1]._insert(new_node)
         else:
             for i in range(0, len(self.data)):
                 if new_node.data[0] < self.data[i]:
@@ -39,8 +41,8 @@ class Node:
 
     # Cuando hay 3 items en el nodo, se divide en un nuevo sub-arbol y se añade al padre
     def _split(self):
-        left_child = Node(self.data[0], self)
-        right_child = Node(self.data[2], self)
+        left_child = Node(self, self.data[0])
+        right_child = Node(self, self.data[2])
         if self.child:
         	self.child[0].parent = left_child
         	self.child[1].parent = left_child
@@ -86,7 +88,6 @@ class Node:
 
 
 class Tree:
-
     def __init__(self):
         self.root = None
 
@@ -94,10 +95,11 @@ class Tree:
         return self.root == None
 
     def insert(self, value):
+        # Cuando se inserta un valor, siempre se crea un nuevo nodo
         if self.empty():
             self.root = Node(value)
         else:
-            self.root.insert(Node(value))
+            self.root._insert(Node(value)) 
             while self.root.parent:
                 self.root = self.root.parent 
         return True

@@ -1,6 +1,6 @@
 # Ayudantía 8
 
-### Contenidos
+## Contenidos
 
 * Árboles 2-3
 
@@ -26,12 +26,12 @@ Por definición, los pesos de los nodos siguen “una norma” similar a la de l
 
 Se deben manejar dos casos:
 
-1. El nodo donde se insertará el dato posee dos datos (datos Y y Z) y tres enlaces
+    1. El nodo donde se insertará el dato posee dos datos (datos Y y Z) y tres enlaces
 En este caso se obtendrá un nodo padre con dos hijos donde se respeta que X < Y < Z donde X, Y y Z son los datos “de peso” de los nodos.
 
 ![Insertar caso 1](images/insertar1.png)
 
-2. El nodo donde se insertará el dato posee un dato (dato Y) y dos enlaces
+    2. El nodo donde se insertará el dato posee un dato (dato Y) y dos enlaces
 En este caso se obtendrá un nodo padre con tres hijos Nulos y con dos elementos donde se
 respeta que si X < Y los datos ordenados serán X,Y respectivamente. Por ejemplo:
 
@@ -41,12 +41,12 @@ respeta que si X < Y los datos ordenados serán X,Y respectivamente. Por ejemplo
 
 Dada la particularidad de estos árboles, y al igual que en la inserción, tenemos que manejar dos casos al momento de eliminar un elemento Z:
 
-1. El nodo donde se encuentra Z tiene dos elementos
+    1. El nodo donde se encuentra Z tiene dos elementos
 En este caso se elimina Z y el nodo queda con un solo elemento.
 
 ![Eliminar caso 1](images/eliminar1.png)
 
-2. El nodo donde se encuentra Z tiene un elemento
+    2. El nodo donde se encuentra Z tiene un elemento
 Es importante notar que, para mantener el balance del árbol deberemos observar al “nodo
 hermano” y/o al nodo “padre” del nodo con el elemento Z ya que es diferente si este posee un
 elemento o dos.
