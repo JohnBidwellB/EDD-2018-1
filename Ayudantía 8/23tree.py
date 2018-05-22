@@ -1,0 +1,115 @@
+class Node:
+    def __init__(self, value):
+        self.data = [value]
+        self.parent = None
+        self.child = []
+
+    def __str__(self):
+        if self.parent:
+            return str(self.parent.data) + " : " + str(self.data)
+        return "Root: " + str(self.data)
+
+    def _is_leaf(self):
+        return len(self.child) == 0
+
+    def _add(self, data):
+        for child in new_node.child:
+            child.parent = self
+        self.data.extend(new_node.data)
+        self.data.sort()
+        self.child.extend(new_node.child)
+        if len(self.child) > 1:
+        	self.child.sort()
+        if len(self.data) > 2:
+            self._split()
+
+    # Encuentra el nodo correcto donde insertar el nuevo nodo    
+    def insert(self, new_node):
+        # Si es hoja, añade el dato a la hoja y hace un balanceo
+        if self._is_leaf():
+            self._add(new_node)
+        # Si no es hoja, debe encontrar el hijo correcto para descender y hace una inserción recursiva
+        elif new_node.data[0] > self.data[-1]:
+            self.child[-1].insert(new_node)
+        else:
+            for i in range(0, len(self.data)):
+                if new_node.data[0] < self.data[i]:
+                    self.child[i]._insert(new_node)
+                    break
+
+    # Cuando hay 3 items en el nodo, se divide en un nuevo sub-arbol y se añade al padre
+    def _split(self):
+        left_child = Node(self.data[0], self)
+        right_child = Node(self.data[2], self)
+        if self.child:
+        	self.child[0].parent = left_child
+        	self.child[1].parent = left_child
+        	self.child[2].parent = right_child
+        	self.child[3].parent = right_child
+        	left_child.child = [self.child[0], self.child[1]]
+        	right_child.child = [self.child[2], self.child[3]]
+
+        self.child = [left_child]
+        self.child.append(right_child)
+        self.data = [self.data[1]]
+		
+        # Ahora tenemos un nuevo sub-arbol, y necesitamos añadirlo a su nodo padre
+        if self.parent:
+        	if self in self.parent.child:
+        		self.parent.child.remove(self)
+        	self.parent._add(self)
+        else:
+        	left_child.parent = self
+        	right_child.parent = self
+			
+	# Busca un item en el arbol y lo retorna siesque lo encuentra, en caso contrario retorna False	
+    def _find(self, item):
+    	if item in self.data:
+    		return item
+    	elif self._is_leaf():
+    		return False
+    	elif item > self.data[-1]:
+    		return self.child[-1]._find(item)
+    	else:
+    		for i in range(len(self.data)):
+    			if item < self.data[i]:
+    				return self.child[i]._find(item)
+		
+    def _remove(self, item):
+    	pass
+		
+	# Imprime en pre-order		
+    def _preorder(self):
+    	print(self) 
+    	for child in self.child:
+            child._preorder()
+
+
+class Tree:
+
+    def __init__(self):
+        self.root = None
+
+    def empty(self):
+        return self.root == None
+
+    def insert(self, value):
+        if self.empty():
+            self.root = Node(value)
+        else:
+            self.root.insert(Node(value))
+            while self.root.parent:
+                self.root = self.root.parent 
+        return True
+
+    def remove(self, item):
+        pass
+
+    def find(self, item):
+        return self.root._find(item)
+
+    def pre_order(self):
+        self.root._preorder()
+
+if __name__=="__main__":
+    pass
