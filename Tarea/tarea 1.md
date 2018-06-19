@@ -51,7 +51,7 @@ Se recomienda realizar un commit para identificar cada uno de los cambios que ha
 
 Este sería un ejemplo del flujo de trabajo que deben hacer con Git:
 
-```git
+```zsh
 git init # Iniciliza un repositorio en la carpeta que nos encontremos
 git add . # Añade todos los archivos, pueden utilizar git add xxx para añadir un archivo en específico
 git commit -m "Mi primer commit"
@@ -60,17 +60,17 @@ git push origin master
 
 Luego al hacer un cambio:
 
-```git
+```zsh
 git add "AVL.py"
 git commit -m "Implementado AVL"
 ```
 
-```git
+```zsh
 git add "hash.py"
 git commit -m "Implementado hash"
 ```
 
-```git
+```zsh
 git add "AVL.py"
 git commit -m "Fix en función insertar para AVL"
 ```

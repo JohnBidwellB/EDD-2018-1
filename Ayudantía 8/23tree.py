@@ -41,8 +41,8 @@ class Node:
 
     # Cuando hay 3 items en el nodo, se divide en un nuevo sub-arbol y se añade al padre
     def _split(self):
-        left_child = Node(self, self.data[0])
-        right_child = Node(self, self.data[2])
+        left_child = Node(self.data[0], self)
+        right_child = Node(self.data[2], self)
         if self.child:
         	self.child[0].parent = left_child
         	self.child[1].parent = left_child
